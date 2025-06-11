@@ -1,47 +1,80 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19736310&assignment_repo_type=AssignmentRepo)
-# MongoDB Fundamentals Assignment
+# PLP Bookstore MongoDB Project
 
-This assignment focuses on learning MongoDB fundamentals including setup, CRUD operations, advanced queries, aggregation pipelines, and indexing.
+## 📚 Project Description
+This project demonstrates fundamental and advanced MongoDB operations for a bookstore database, including CRUD operations, aggregation pipelines, and indexing.
 
-## Assignment Overview
+## 🛠️ Setup Instructions
 
-You will:
-1. Set up a MongoDB database
-2. Perform basic CRUD operations
-3. Write advanced queries with filtering, projection, and sorting
-4. Create aggregation pipelines for data analysis
-5. Implement indexing for performance optimization
+### Prerequisites
+- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+- [MongoDB Shell (mongosh)](https://www.mongodb.com/try/download/shell)
 
-## Getting Started
+### Installation Steps
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install MongoDB locally or set up a MongoDB Atlas account
-4. Run the provided `insert_books.js` script to populate your database
-5. Complete the tasks in the assignment document
+1. **Install MongoDB Community Edition**
+   - Download the appropriate version for your OS from [MongoDB Download Center](https://www.mongodb.com/try/download/community)
+   - Follow the installation wizard
 
-## Files Included
+2. **Start MongoDB Service**
+   ```bash
+   sudo systemctl start mongod
+3. **Verify Service Status**
+    ```bash
+   sudo systemctl status mongod
 
-- `Week1-Assignment.md`: Detailed assignment instructions
-- `insert_books.js`: Script to populate your MongoDB database with sample book data
+4. **Database Initialization**
+Connect to MongoDB
+  bash
+  mongosh
 
-## Requirements
+5. **Create Database and Collection**
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- MongoDB Shell (mongosh) or MongoDB Compass
+javascript
+use plp_bookstore
+db.createCollection("books")
+Data Population
+Edit the insert script
 
-## Submission
+Modify insert_books.js with your book data
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+Run the insertion script
 
-1. Complete all tasks in the assignment
-2. Add your `queries.js` file with all required MongoDB queries
-3. Include a screenshot of your MongoDB database
-4. Update the README.md with your specific setup instructions
+bash
+mongosh insert_books.js
+📂 File Structure
+text
+project-root/
+│
+├── insert_books.js    # Script to populate books collection
+├── queries.js        # Contains all MongoDB queries
+└── README.md         # This documentation
+🏗️ Running Queries
+Interactive Mode
 
-## Resources
+bash
+mongosh
+use plp_bookstore
+// Paste your queries here
+Script Mode
 
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [MongoDB University](https://university.mongodb.com/)
-- [MongoDB Node.js Driver](https://mongodb.github.io/node-mongodb-native/) 
+bash
+mongosh queries.js
+🔍 Verification
+javascript
+// Check document count
+db.books.countDocuments()
+
+// Test a sample query
+db.books.find({ genre: "Fantasy" }).pretty()
+⚙️ Index Implementation
+javascript
+// Single index on title
+db.books.createIndex({ title: 1 })
+
+// Compound index on author and published_year
+db.books.createIndex({ author: 1, published_year: 1 })
+🚨 Troubleshooting
+Issue	Solution
+Connection refused	Ensure mongod service is running: sudo systemctl start mongod
+Command not found	Verify mongosh is in your PATH
+Script errors	Check JavaScript syntax in your .js files
